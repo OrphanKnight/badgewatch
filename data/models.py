@@ -2,19 +2,15 @@ from django.db import models
 # Create your models here.
 
 class Officer(models.Model):
-    badgeID=models.CharField(max_length = 20)
+    badgeID=models.IntegerField(primary_key=True)
     firstName=models.CharField(max_length = 20)
     lastName=models.CharField(max_length = 20)
-
-class Complaint(models.Model):
-    categroy=models.CharField(max_length = 50)
-    badgeID=models.CharField(max_length = 20)
-    firstName=models.CharField(max_length = 20)
-    lastName=models.CharField(max_length = 20)
-    classification=models.CharField(max_length = 20)
-    allegation=models.CharField(max_length = 20)
-    finding=models.CharField(max_length = 20)
     
 
-
-
+class Complaint(models.Model):
+    category=models.CharField(null=True, max_length = 50)
+    badgeID_id=models.ForeignKey(Officer, on_delete=models.CASCADE)
+    classification=models.CharField(null=True, max_length = 50,)
+    allegation=models.CharField(null=True, max_length = 50)
+    finding=models.CharField(null=True, max_length = 50 )
+    
